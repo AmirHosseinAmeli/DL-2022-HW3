@@ -1,0 +1,37 @@
+\begin{enumerate}[label=(\alph*)]
+	\item
+	
+	با نوشتن رابطه امیدریاضی و استفاده از
+	\href{https://en.wikipedia.org/wiki/Leibniz_integral_rule}{قانون انتگرال لایبنیتز}
+	 داریم:
+	$$
+	\begin{aligned}
+		{\nabla _\theta }{\mathbb{E}_{z\~{q_\theta }\left( z \right)}}\left[ {f\left( z \right)} \right] &= {\nabla _\theta }\int_z {f\left( z \right){q_\theta }\left( z \right)dz} \\
+		&= \int_z {f\left( z \right){\nabla _\theta }{q_\theta }\left( z \right)dz} 
+	\end{aligned}
+	$$
+	
+	‌سپس با توجه به تساوی
+	${\nabla _\theta }{q_\theta }\left( z \right) = {q_\theta }\left( z \right){\nabla _\theta }\ln {q_\theta }\left( z \right)$
+	داریم:
+	$$
+	{\nabla _\theta }{\mathbb{E}_{z\~{q_\theta }\left( z \right)}}\left[ {f\left( z \right)} \right] = \int_z {f\left( z \right){q_\theta }\left( z \right){\nabla _\theta }\ln {q_\theta }\left( z \right)dz} 
+	$$
+	
+	سپس با تخمین مونته کارلو امیدریاضی بالا به مطلوب سوال دست پیدا می‌کنیم.\\
+	مشکلی که تخمین بالا دارد این است که با اینکه تخمینگر نااریبی می‌باشد ولی طبق نتایج تجربی واریانس بالایی دارد و تابع $f$ در گرادیان تاثیر مستقیمی ندارد. برای کاهش واریانس ساده‌ترین روش افزایش مقدار N می‌باشد ولی باعث افزایش هزینه و محاسبات می‌شود.
+	
+	\item
+	
+ 	باتوجه به اینکه هدف ما بیشینه‌سازی امیدریاضی تابع $f$ می‌باشد، در تابع هزینه بالا گرادیان‌های بدست آمده براساس نمونه‌‌های بدست آمده از توزیع کدگذار می‌باشد و تابع f دخالت مستقیمی در بهینه‌سازی ندارد. به عبارت دیگر مسیر بهینه‌سازی و گرادیان ‌های بدست آمده تنها وابستگی به نمونه‌های تولید شده دارد و ممکن است بعضی از نمونه‌هایی تاثیر مهمی دارند در فرایند نمونه‌گیری ظاهر نشوند. ولی در Reparameterization شرایط متفاوت می‌شود. شما فرض کنید توزیع کدگذار گاوسی می‌باشد. تابع هزینه بالا به صورت زیر تغییر پیدا می‌کند.
+ 	
+ 	$$
+ 	{\nabla _\theta }{\mathbb{E}_{z \sim \;{q_\theta }\left( z \right)}}\left[ {f\left( z \right)} \right] = {\nabla _\theta }{\mathbb{E}_{v \sim \;N(0,1)}}\left[ {f\left( {{\sigma _\theta }\left( x \right).v + {\mu _\theta }\left( x \right)} \right)} \right]
+ 	$$
+	
+	همانطور که در رابطه بالا مشخص است، در بدست آوردن گرادیان نسبت به پارامتر تتا، تابع $f$ نیز تاثیر مستقیمی می‌گذارد و باعث می‌شود گرادیان های بدست آمده بهتر از حالت اول باشند.
+	
+	\item
+	
+	در حالتی که فضای ما پیوسته‌ باشد و توزیع داده شده در حالت کلی یک توزیع چندمتغیره گاوسی با واریانس $I$ باشد،‌ با جایگذاری در رابطه بالا یک عبارتی به شکل خطای MSE ظاهر می‌شود.
+\end{enumerate}

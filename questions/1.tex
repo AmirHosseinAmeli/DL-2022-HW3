@@ -1,0 +1,49 @@
+مکانیزم توجه برای از بین بردن گلوگاه اطلاعات بین رمزگذار و رمزگشا معرفی شده است. به این صورت که به جای آخرین بردار نهان رمزگذار، رمزگشا به تمام بردارهای نهان رمزگذار دسترسی دارد. این مکانیزم به صورت زیر فرموله می‌شود و در هر گام شبکه‌ی تکرارشونده‌ی رمزگشا مورد استفاده قرار می‌گیرد:
+\begin{equation}
+	{a_t}\left( s \right) = \frac{{\exp score\left( {h_d^{\left( t \right)},h_e^{\left( s \right)}} \right)}}{{\sum\limits_{s'} {\exp score\left( {h_d^{\left( t \right)},h_e^{\left( {s'} \right)}} \right)} }}
+\end{equation}
+\begin{equation}
+	{c_t} = \sum\limits_{s'} {{a_t}\left( {s'} \right)h_e^{\left( {s'} \right)}} 
+\end{equation}
+\begin{equation}
+	\hat h = \tanh {W_c}\left[ {{c_t};h_d^{\left( t \right)}} \right]
+\end{equation}
+\begin{equation}
+	{y_t} = softmax \left( {{W_s}\hat h} \right)
+\end{equation}
+
+که در آن
+${h_d^{\left( i \right)}}$
+بردار نهان رمزگشا،
+${h_e^{\left( i \right)}}$
+بردار نهان رمزگذار و
+$y_t$
+خروجی گام
+$t$
+ام رمزگشا می‌باشد. تابع
+${score\left( {h_d^{\left( t \right)},h_e^{\left( s \right)}} \right)}$
+را می‌توان به سه روش زیر تعریف کرد:
+ 
+$$
+score\left( {h_d^{\left( t \right)},h_e^{\left( s \right)}} \right) = \left\{ {\begin{array}{*{20}{c}}
+		{h_d^{{{\left( t \right)}^T}}h_e^{\left( s \right)}}&{dot}\\
+		{h_d^{{{\left( t \right)}^T}}{W_a}h_e^{\left( s \right)}}&{general}\\
+		{v_a^T\tanh {W_a}\left[ {h_d^{\left( t \right)};h_e^{\left( s \right)}} \right]}&{\tanh layer}
+\end{array}} \right.
+$$
+
+\begin{enumerate}[label=(\alph*)]
+	\item
+	این سه تابع را از نظر توان مدل کردن، هزینه‌ی محاسباتی و عبور گرادیان در مرحله بازانتشار خطا مقایسه کنید. شما کدام یک را برای یک شبکه
+	\lr{Seq2Seq}
+	انتخاب می‌کنید؟
+	\item
+	در ادبیات یادگیری عمیق، دو کار پژوهشی دو مکانیزم توجه ارائه داده‌اند که جز رایج‌ترین کار‌های این حوزه می‌باشد: 1-
+	\href{https://arxiv.org/abs/1409.0473}{مکانیزم1}
+	2-
+	\href{https://arxiv.org/abs/1508.04025}{مکانیزم2}
+	.
+	این دو ساختار را با هم مقایسه کنید و تفاوت‌های آن را ذکر کنید. کدام یک توانایی مدل کردن بیشتری دارد؟
+	\item
+	یکی از مشکلات رایج مکانیزم توجه، مخصوصا هنگامی که متن ورودی در طرف رمزگذار طولانی باشد، عدم توانایی این مکانیزم در پرداختن به تکه‌های مختلف متن ورودی است. به طور مثال ممکن است در تمامی گام‌های رمزگشا، مکانیزم توجه فقط به یک یا دو کلمه ی خاص امتیاز بسیار بالایی بدهد و فقط آن‌ها را در نظر بگیرد. در این صورت مدل قادر نخواهد بود که از تمامی متن ورودی استفاده کند. برای حل این مشکل چه راهکاری پیشنهاد میدهید؟ توضیح دهید.
+\end{enumerate}
